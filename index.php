@@ -36,7 +36,14 @@
     </form>
     <?php
     if (isset($_POST["user-gender"]) && isset($_POST["user-name"]) && isset($_POST["user-firstname"]) && isset($_FILES["user-file"])) {
-        echo $_POST["user-gender"] . " " . $_POST["user-name"] . " " . $_POST["user-firstname"] . " " . $_FILES["user-file"]["name"] . " " . $_FILES["user-file"]["type"];
+        echo $_POST["user-gender"] . " " . $_POST["user-name"] . " " . $_POST["user-firstname"];
+        $allowedMimeTypes = ['application/pdf'];
+        if(in_array($_FILES['user-file']['type'], $allowedMimeTypes)){
+            //Ton code pour afficher le nom de ton fichier pdf
+            echo $_FILES["user-file"]["name"] ;
+        }else{
+            echo " Erreur, Merci de joindre un fichier de type pdf uniquement !";
+        }
     }else{?>
         <form method="post" action="index.php" enctype="multipart/form-data">
             <div>
